@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -61,52 +61,33 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-[原创]Intro.js使用心得" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-123" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/10/[原创]Intro.js使用心得/" class="article-date">
-  <time datetime="2017-04-10T07:37:48.252Z" itemprop="datePublished">2017-04-10</time>
+    <a href="/2017/04/11/123/" class="article-date">
+  <time datetime="2017-04-11T02:19:37.000Z" itemprop="datePublished">2017-04-11</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/11/123/">123</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="为什么要使用-Intro-js"><a href="#为什么要使用-Intro-js" class="headerlink" title="为什么要使用 Intro.js"></a>为什么要使用 Intro.js</h3><p>下面摘自<a href="http://introjs.com/" target="_blank" rel="external">官网</a>：</p>
-<blockquote>
-<p>When new users visit your website or product you should demonstrate your product features using a step-by-step guide. Even when you develop and add a new feature to your product, you should be able to represent them to your users using a user-friendly solution. Intro.js is developed to enable web and mobile developers to create a step-by-step introduction easily.</p>
-</blockquote>
-<p>很好理解，主要就是「如果一个新的用户访问您的网站或者您的网站有一个新的功能上线的时候，可以做一个一步一步引导的提示，帮助用户迅速发现新功能」，我最近做的项目，刚好就有相同的需求，就顺便研究了下，分享给大家。</p>
-<h3 id="如何使用-Intro-js"><a href="#如何使用-Intro-js" class="headerlink" title="如何使用 Intro.js"></a>如何使用 Intro.js</h3><ol>
-<li>下载最新版 <a href="https://github.com/usablica/intro.js/releases" target="_blank" rel="external">Intro.js</a></li>
-<li>解压后，找到 intro.js 和 introjs.css 两个文件，并引入到项目中</li>
-<li>在需要进行引导的节点上增加对应属性，详细属性可查看<a href="http://introjs.com/docs" target="_blank" rel="external">官方文档</a> </li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;first&quot; data-intro=&apos;欢迎大家关注我的博客！&apos; data-position = &apos;right&apos; data-step = &apos;1&apos;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
-<p>属性介绍：</p>
-<ul>
-<li>data-intro：引导提示的内容</li>
-<li>data-position：引导提示框的位置，默认是在下方，但是如果功能特别靠近页面底部的话，就会遮挡，所以需要修改位置</li>
-<li>data-step：指定当前引导提示是第几步</li>
-</ul>
-<ol>
-<li>调用开始方法</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">introJs().start();</div></pre></td></tr></table></figure>
-<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">function intro()&#123;</div><div class="line">  try &#123;</div><div class="line">	</div><div class="line">	//对cookie中内容进行判断，如果已经提示过，则不在提示</div><div class="line">	 var intro_cookie = $.cookie(&quot;intro_cookie_name&quot;);</div><div class="line">	 if(!!intro_cookie&amp;&amp;&apos;true&apos;===intro_cookie)&#123;</div><div class="line">	      return;</div><div class="line">	 &#125;</div><div class="line">	 </div><div class="line">	 //动态给页面增加提示内容，此处需要注意的是，如果不设置data-step，提示的顺序不一定是从上到下。</div><div class="line">         $(&quot;#blankPanela7f19&quot;).attr(&quot;data-intro&quot;,&quot;可对卷宗内容直接检索啦&quot;);</div><div class="line">         $(&quot;#blankPanelTssp&quot;).attr(&quot;data-intro&quot;,&quot;如有原审和庭审视频，可以直接查看啦&quot;).attr(&quot;data-position&quot;,&quot;right&quot;);</div><div class="line">         $(&quot;#blankPanelc46eb&quot;).attr(&quot;data-intro&quot;,&quot;卷宗目录树可以直接查看材料页码和附件内容啦&quot;).attr(&quot;data-position&quot;,&quot;right&quot;);</div><div class="line">         $(&quot;#blankPanelYljzIntro&quot;).attr(&quot;data-intro&quot;,&quot;卷宗目录树可以直接查看材料页码和附件内容啦&quot;).attr(&quot;data-position&quot;,&quot;left&quot;);</div><div class="line">         </div><div class="line">         //设置完成时事件和退出时事件，引导提示完成后，向cookie中添加控制需要的内容</div><div class="line">         var introjs = introJs().oncomplete(introComplete);</div><div class="line">         introjs = introjs.onexit(introComplete);</div><div class="line">         introjs.start();</div><div class="line">    &#125;</div><div class="line">    catch(err) &#123;</div><div class="line">        //加入异常控制，防止因为引导提示出现异常，导致整个页面无法使用</div><div class="line">    	introComplete();</div><div class="line">    &#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 引导提示完成时脚本</div><div class="line"> * */</div><div class="line">function introComplete()&#123;</div><div class="line">    //使用此方法需要引入：jquery.cookie.js</div><div class="line">    $.cookie(&quot;intro_cookie_name&quot;, &apos;true&apos;, &#123; expires: 1000 &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里需要注意一下增加引导提示完成时事件的写法，<a href="http://introjs.com/docs/intro/api/" target="_blank" rel="external">官方 API </a>中写法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">introJs().oncomplete(function() &#123;</div><div class="line">  alert(&quot;end of introduction&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>这样写并没有什么错误，但是此时直接调用开始方法 introjs.start() 你会发现，代码根本不会执行，这是为什么呢？</p>
-<p>通过查看源码（如下）就很容易发现问题所在，当我们增加事件的时候，他会给 this 中 _introCompleteCallback 赋值，然后返回有事件的 this ，这个时候如果我们不接住这个变量的话，默认的 introJs 肯定没有这些事件的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">oncomplete: function(providedCallback) &#123;</div><div class="line">      if (typeof (providedCallback) === &apos;function&apos;) &#123;</div><div class="line">        this._introCompleteCallback = providedCallback;</div><div class="line">      &#125; else &#123;</div><div class="line">        throw new Error(&apos;Provided callback for oncomplete was not a function.&apos;);</div><div class="line">      &#125;</div><div class="line">      return this;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="成果图"><a href="#成果图" class="headerlink" title="成果图"></a>成果图</h3><p>最后附一张成果图</p>
-<p><img src="/img/introjs001.png" alt="image"></p>
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/10/[原创]Intro.js使用心得/" data-id="cj1cx21eh00007swlfhrrvuts" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/04/11/123/" data-id="cj1cx66ht0000gowl92ncerk9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -151,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/05/hello-world/" data-id="cj1cx21et00017swlhglqhbl7" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/04/05/hello-world/" data-id="cj1cx66j30001gowl28vwys1w" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -176,7 +157,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li></ul>
     </div>
@@ -186,12 +167,12 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2017/04/10/[原创]Intro.js使用心得/">(no title)</a>
+            <a href="/2017/04/11/123/">123</a>
           </li>
         
           <li>
@@ -211,7 +192,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Dandelion<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
