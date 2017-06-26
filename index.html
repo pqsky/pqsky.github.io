@@ -250,146 +250,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pqsky.me/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dandelion">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pqsky">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" itemprop="url">
-                  javax.imageio.IIOException Invalid icc profile bad sequence number.md
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T12:15:11+08:00">
-                2017-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" class="leancloud_visitors" data-flag-title="javax.imageio.IIOException Invalid icc profile bad sequence number.md">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h3><ul>
-<li>客户使用扫描仪进行图片扫描后保存在本地，格式为jpg</li>
-<li>进入系统后，选择本地文件进行材料上传，系统提示上传失败，日志如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">javax.imageio.IIOException: Invalid icc profile: bad sequence number</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readImageHeader(Native Method) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readNativeHeader(JPEGImageReader.java:584) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.checkTablesOnly(JPEGImageReader.java:322) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.gotoImage(JPEGImageReader.java:456) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readHeader(JPEGImageReader.java:577) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readInternal(JPEGImageReader.java:1034) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.read(JPEGImageReader.java:1014) ~[na:1.6.0_45]</div><div class="line">	at javax.imageio.ImageIO.read(ImageIO.java:1422) ~[na:1.6.0_45]</div><div class="line">	at javax.imageio.ImageIO.read(ImageIO.java:1326) ~[na:1.6.0_45]</div><div class="line">	at com.thunisoft.fy.dzjz.common.image.ImageCompressJPG.getBufferedImage(ImageCompressJPG.java:49) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at com.thunisoft.fy.dzjz.common.image.ImageCompressJPG.handle(ImageCompressJPG.java:26) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at com.thunisoft.fy.dzjz.common.image.ImageCompressNormalMode.handle(ImageCompressNormalMode.java:38) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at com.thunisoft.fy.dzjz.common.onlinepaper.CompressRunnable.run(CompressRunnable.java:93) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895) [na:1.6.0_45]</div><div class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918) [na:1.6.0_45]</div><div class="line">	at java.lang.Thread.run(Thread.java:662) [na:1.6.0_45]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://pqsky.me/2017/04/12/原创-Intro-js使用心得/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -566,7 +426,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -574,15 +434,6 @@
 
           
 
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
           
 
         </nav>
