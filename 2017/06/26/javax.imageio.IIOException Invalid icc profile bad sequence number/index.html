@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://pqsky.me/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/index.html">
 <meta property="og:site_name" content="pqsky">
 <meta property="og:description" content="问题现象 客户使用扫描仪进行图片扫描后保存在本地，格式为jpg 进入系统后，选择本地文件进行材料上传，系统提示上传失败，日志如下1234567891011121314151617javax.imageio.IIOException: Invalid icc profile: bad sequence number	at com.sun.imageio.plugins.jpeg.JPEGImageR">
-<meta property="og:updated_time" content="2017-06-26T04:39:59.352Z">
+<meta property="og:updated_time" content="2017-06-26T09:39:32.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[总结]javax.imageio.IIOException Invalid icc profile bad sequence number">
 <meta name="twitter:description" content="问题现象 客户使用扫描仪进行图片扫描后保存在本地，格式为jpg 进入系统后，选择本地文件进行材料上传，系统提示上传失败，日志如下1234567891011121314151617javax.imageio.IIOException: Invalid icc profile: bad sequence number	at com.sun.imageio.plugins.jpeg.JPEGImageR">
@@ -338,7 +338,6 @@
 <li>进入系统后，选择本地文件进行材料上传，系统提示上传失败，日志如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">javax.imageio.IIOException: Invalid icc profile: bad sequence number</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readImageHeader(Native Method) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readNativeHeader(JPEGImageReader.java:584) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.checkTablesOnly(JPEGImageReader.java:322) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.gotoImage(JPEGImageReader.java:456) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readHeader(JPEGImageReader.java:577) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readInternal(JPEGImageReader.java:1034) ~[na:1.6.0_45]</div><div class="line">	at com.sun.imageio.plugins.jpeg.JPEGImageReader.read(JPEGImageReader.java:1014) ~[na:1.6.0_45]</div><div class="line">	at javax.imageio.ImageIO.read(ImageIO.java:1422) ~[na:1.6.0_45]</div><div class="line">	at javax.imageio.ImageIO.read(ImageIO.java:1326) ~[na:1.6.0_45]</div><div class="line">	at com.thunisoft.fy.dzjz.common.image.ImageCompressJPG.getBufferedImage(ImageCompressJPG.java:49) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at com.thunisoft.fy.dzjz.common.image.ImageCompressJPG.handle(ImageCompressJPG.java:26) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at com.thunisoft.fy.dzjz.common.image.ImageCompressNormalMode.handle(ImageCompressNormalMode.java:38) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at com.thunisoft.fy.dzjz.common.onlinepaper.CompressRunnable.run(CompressRunnable.java:93) ~[commons-dzjz-fygyzj-3.0.6-SNAPSHOT.jar:3.0.6-SNAPSHOT]</div><div class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895) [na:1.6.0_45]</div><div class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918) [na:1.6.0_45]</div><div class="line">	at java.lang.Thread.run(Thread.java:662) [na:1.6.0_45]</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<a id="more"></a>
 <h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><ul>
 <li><p>本地测试：自己下载的jpg文件上传正常，现场发回来的文件依然失败。</p>
 </li>
@@ -349,13 +348,32 @@
 </li>
 <li><p>找了很多资料，下面这个帖子给了启发，主要就是重写获取图片流的方法，改完后一切正常了。<a href="http://feicer.iteye.com/blog/803138#bc2345723" target="_blank" rel="external">参考地址</a></p>
 </li>
-<li><p>代码修改前后对比</p>
-</li>
+</ul>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="方案一：重写方法"><a href="#方案一：重写方法" class="headerlink" title="方案一：重写方法"></a>方案一：重写方法</h4><ul>
+<li>代码修改前后对比</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">修改前代码：</div><div class="line"></div><div class="line">import javax.imageio.ImageIO;</div><div class="line">/**</div><div class="line">     * 获取缓冲图片文件</div><div class="line">     * @param is 输入流</div><div class="line">     * @return 缓冲图片对象</div><div class="line">     * @throws Exception 异常</div><div class="line">     */</div><div class="line">    protected BufferedImage getBufferedImage(InputStream is) throws Exception &#123;</div><div class="line">        return ImageIO.read(is);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">修改后代码：</div><div class="line"></div><div class="line">import com.sun.image.codec.jpeg.JPEGImageDecoder;</div><div class="line">import com.sun.image.codec.jpeg.JPEGCodec;</div><div class="line">import com.sun.image.codec.jpeg.JPEGImageDecoder;</div><div class="line">/**</div><div class="line">     * 获取缓冲图片文件</div><div class="line">     * @param is 输入流</div><div class="line">     * @return 缓冲图片对象</div><div class="line">     * @throws Exception 异常</div><div class="line">     */</div><div class="line">    protected BufferedImage getBufferedImage(InputStream is) throws Exception &#123;</div><div class="line">        JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(is);</div><div class="line">        return decoder.decodeAsBufferedImage();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="方案二：引用twelvemonkeys"><a href="#方案二：引用twelvemonkeys" class="headerlink" title="方案二：引用twelvemonkeys"></a>方案二：引用twelvemonkeys</h4><ul>
+<li>直接引用最新版本twelvemonkeys.jar即可，代码不变。<blockquote>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.twelvemonkeys.imageio&lt;/groupId&gt;
+    &lt;artifactId&gt;imageio&lt;/artifactId&gt;
+    &lt;version&gt;3.0.2&lt;/version&gt;
+    &lt;type&gt;pom&lt;/type&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;com.twelvemonkeys.imageio&lt;/groupId&gt;
+    &lt;artifactId&gt;imageio-jpeg&lt;/artifactId&gt;
+    &lt;version&gt;3.0.2&lt;/version&gt;
+&lt;/dependency&gt; 
+</code></pre></blockquote>
+</li>
+</ul>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
 <li><a href="http://blog.csdn.net/danns888/article/details/24376431" target="_blank" rel="external">http://blog.csdn.net/danns888/article/details/24376431</a></li>
 <li><a href="http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6791502" target="_blank" rel="external">http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6791502</a></li>
+<li><a href="https://github.com/haraldk/TwelveMonkeys" target="_blank" rel="external">https://github.com/haraldk/TwelveMonkeys</a></li>
 </ul>
 
       
@@ -567,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题现象"><span class="nav-number">1.</span> <span class="nav-text">问题现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">2.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题现象"><span class="nav-number">1.</span> <span class="nav-text">问题现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">2.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方案一：重写方法"><span class="nav-number">3.1.</span> <span class="nav-text">方案一：重写方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案二：引用twelvemonkeys"><span class="nav-number">3.2.</span> <span class="nav-text">方案二：引用twelvemonkeys</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
