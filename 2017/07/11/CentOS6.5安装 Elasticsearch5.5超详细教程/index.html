@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://pqsky.me/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/index.html">
 <meta property="og:site_name" content="pqsky">
 <meta property="og:description" content="一、Elasticsearch 简介下面摘自官网  Elasticsearch is a distributed, RESTful search and analytics engine capable of solving a growing number of use cases. As the heart of the Elastic Stack, it centrally stores y">
-<meta property="og:updated_time" content="2017-07-11T06:43:15.081Z">
+<meta property="og:updated_time" content="2017-07-11T06:45:21.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS6.5 安装 Elasticsearch5.5 超详细教程">
 <meta name="twitter:description" content="一、Elasticsearch 简介下面摘自官网  Elasticsearch is a distributed, RESTful search and analytics engine capable of solving a growing number of use cases. As the heart of the Elastic Stack, it centrally stores y">
@@ -354,10 +354,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[2017-07-11T12:10:33,262][WARN ][o.e.b.ElasticsearchUncaughtExceptionHandler] [] uncaught exception in thread [main]</div><div class="line">org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root</div><div class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:127) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:114) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:67) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:122) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.cli.Command.main(Command.java:88) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:91) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:84) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">Caused by: java.lang.RuntimeException: can not run elasticsearch as root</div><div class="line">	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:106) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:194) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:351) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:123) ~[elasticsearch-5.5.0.jar:5.5.0]</div><div class="line">	... 6 more</div></pre></td></tr></table></figure>
 <p>解决方案有两种：</p>
 <ol>
-<li>直接修改Elasticsearch配置，支持用root启动。 </li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">因为未验证，后续补充</div></pre></td></tr></table></figure>
-<ol>
+<li><p>直接修改Elasticsearch配置，支持用root启动。 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">因为未验证，后续补充</div></pre></td></tr></table></figure>
+</li>
 <li><p>出于系统安全考虑，建议新建单独的用户运行 Elasticsearch。</p>
 <p> (1) 创建用户组和用户</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ groupadd esgroup</div><div class="line">$ useradd es -g esgroup</div></pre></td></tr></table></figure>
@@ -390,9 +389,8 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[es@localhost elasticsearch-5.5.0]$ ps -ef | grep elastic</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<pre><code>输出结果：
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">es       26430 26272 16 12:59 pts/1    00:00:22 /opt/jdk1.8.0_112/bin/java -Xms2g -Xmx2g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -server -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -Djdk.io.permissionsUseCanonicalPath=true -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Dlog4j.skipJansi=true -XX:+HeapDumpOnOutOfMemoryError -Des.path.home=/opt/es/elasticsearch-5.5.0 -cp /opt/es/elasticsearch-5.5.0/lib/* org.elasticsearch.bootstrap.Elasticsearch</div></pre></td></tr></table></figure>
+<p>   输出结果：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">es       26430 26272 16 12:59 pts/1    00:00:22 /opt/jdk1.8.0_112/bin/java -Xms2g -Xmx2g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -server -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -Djdk.io.permissionsUseCanonicalPath=true -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Dlog4j.skipJansi=true -XX:+HeapDumpOnOutOfMemoryError -Des.path.home=/opt/es/elasticsearch-5.5.0 -cp /opt/es/elasticsearch-5.5.0/lib/* org.elasticsearch.bootstrap.Elasticsearch</div></pre></td></tr></table></figure>
 </code></pre><p>五、Elasticsearch 关闭</p>
 <ul>
 <li><p>通过上一步查看到的 Elasticsearch 状态中的端口，执行下面命令杀死 Elasticsearch 进程</p>
