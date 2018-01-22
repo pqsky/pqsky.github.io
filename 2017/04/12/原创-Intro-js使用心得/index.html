@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>[原创]Intro.js使用心得 | pqsky</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="为什么要使用 Intro.js下面摘自官网：  When new users visit your website or product you should demonstrate your product features using a step-by-step guide. Even when you develop and add a new feature to your produc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原创]Intro.js使用心得">
+<meta property="og:url" content="http://pqsky.me/2017/04/12/原创-Intro-js使用心得/index.html">
+<meta property="og:site_name" content="pqsky">
+<meta property="og:description" content="为什么要使用 Intro.js下面摘自官网：  When new users visit your website or product you should demonstrate your product features using a step-by-step guide. Even when you develop and add a new feature to your produc">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pqsky.me/img/introjs001.png">
+<meta property="og:updated_time" content="2017-06-26T04:32:00.959Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原创]Intro.js使用心得">
+<meta name="twitter:description" content="为什么要使用 Intro.js下面摘自官网：  When new users visit your website or product you should demonstrate your product features using a step-by-step guide. Even when you develop and add a new feature to your produc">
+<meta name="twitter:image" content="http://pqsky.me/img/introjs001.png">
+    
+
+    
+        <link rel="alternate" href="/" title="pqsky" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">pqsky</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">蒲公英丶</h2>
+            <h3 id="title">将进酒 &amp; 杯莫停</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>北京 , 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/pqsky">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                3
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                1
+                <span>Etiqueta</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/pqsky" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-原创-Intro-js使用心得" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            [原创]Intro.js使用心得
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/12/原创-Intro-js使用心得/">
+            <time datetime="2017-04-12T03:11:12.000Z" itemprop="datePublished">2017-04-12</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="为什么要使用-Intro-js"><a href="#为什么要使用-Intro-js" class="headerlink" title="为什么要使用 Intro.js"></a>为什么要使用 Intro.js</h3><p>下面摘自<a href="http://introjs.com/" target="_blank" rel="noopener">官网</a>：</p>
+<blockquote>
+<p>When new users visit your website or product you should demonstrate your product features using a step-by-step guide. Even when you develop and add a new feature to your product, you should be able to represent them to your users using a user-friendly solution. Intro.js is developed to enable web and mobile developers to create a step-by-step introduction easily.</p>
+</blockquote>
+<p>很好理解，主要就是「如果一个新的用户访问您的网站或者您的网站有一个新的功能上线的时候，可以做一个一步一步引导的提示，帮助用户迅速发现新功能」，我最近做的项目，刚好就有相同的需求，就顺便研究了下，分享给大家。<br><a id="more"></a></p>
+<h3 id="如何使用-Intro-js"><a href="#如何使用-Intro-js" class="headerlink" title="如何使用 Intro.js"></a>如何使用 Intro.js</h3><ol>
+<li>下载最新版 <a href="https://github.com/usablica/intro.js/releases" target="_blank" rel="noopener">Intro.js</a></li>
+<li>解压后，找到 intro.js 和 introjs.css 两个文件，并引入到项目中</li>
+<li>在需要进行引导的节点上增加对应属性，详细属性可查看<a href="http://introjs.com/docs" target="_blank" rel="noopener">官方文档</a> </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;first&quot; data-intro=&apos;欢迎大家关注我的博客！&apos; data-position = &apos;right&apos; data-step = &apos;1&apos;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>属性介绍：</p>
+<ul>
+<li>data-intro：引导提示的内容</li>
+<li>data-position：引导提示框的位置，默认是在下方，但是如果功能特别靠近页面底部的话，就会遮挡，所以需要修改位置</li>
+<li>data-step：指定当前引导提示是第几步</li>
+</ul>
+<ol>
+<li>调用开始方法</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">introJs().start();</span><br></pre></td></tr></table></figure>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function intro()&#123;</span><br><span class="line">  try &#123;</span><br><span class="line">	</span><br><span class="line">	//对cookie中内容进行判断，如果已经提示过，则不在提示</span><br><span class="line">	 var intro_cookie = $.cookie(&quot;intro_cookie_name&quot;);</span><br><span class="line">	 if(!!intro_cookie&amp;&amp;&apos;true&apos;===intro_cookie)&#123;</span><br><span class="line">	      return;</span><br><span class="line">	 &#125;</span><br><span class="line">	 </span><br><span class="line">	 //动态给页面增加提示内容，此处需要注意的是，如果不设置data-step，提示的顺序不一定是从上到下。</span><br><span class="line">         $(&quot;#blankPanela7f19&quot;).attr(&quot;data-intro&quot;,&quot;可对卷宗内容直接检索啦&quot;);</span><br><span class="line">         $(&quot;#blankPanelTssp&quot;).attr(&quot;data-intro&quot;,&quot;如有原审和庭审视频，可以直接查看啦&quot;).attr(&quot;data-position&quot;,&quot;right&quot;);</span><br><span class="line">         $(&quot;#blankPanelc46eb&quot;).attr(&quot;data-intro&quot;,&quot;卷宗目录树可以直接查看材料页码和附件内容啦&quot;).attr(&quot;data-position&quot;,&quot;right&quot;);</span><br><span class="line">         $(&quot;#blankPanelYljzIntro&quot;).attr(&quot;data-intro&quot;,&quot;卷宗目录树可以直接查看材料页码和附件内容啦&quot;).attr(&quot;data-position&quot;,&quot;left&quot;);</span><br><span class="line">         </span><br><span class="line">         //设置完成时事件和退出时事件，引导提示完成后，向cookie中添加控制需要的内容</span><br><span class="line">         var introjs = introJs().oncomplete(introComplete);</span><br><span class="line">         introjs = introjs.onexit(introComplete);</span><br><span class="line">         introjs.start();</span><br><span class="line">    &#125;</span><br><span class="line">    catch(err) &#123;</span><br><span class="line">        //加入异常控制，防止因为引导提示出现异常，导致整个页面无法使用</span><br><span class="line">    	introComplete();</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 引导提示完成时脚本</span><br><span class="line"> * */</span><br><span class="line">function introComplete()&#123;</span><br><span class="line">    //使用此方法需要引入：jquery.cookie.js</span><br><span class="line">    $.cookie(&quot;intro_cookie_name&quot;, &apos;true&apos;, &#123; expires: 1000 &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要注意一下增加引导提示完成时事件的写法，<a href="http://introjs.com/docs/intro/api/" target="_blank" rel="noopener">官方 API </a>中写法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">introJs().oncomplete(function() &#123;</span><br><span class="line">  alert(&quot;end of introduction&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样写并没有什么错误，但是此时直接调用开始方法 introjs.start() 你会发现，代码根本不会执行，这是为什么呢？</p>
+<p>通过查看源码（如下）就很容易发现问题所在，当我们增加事件的时候，他会给 this 中 _introCompleteCallback 赋值，然后返回有事件的 this ，这个时候如果我们不接住这个变量的话，默认的 introJs 肯定没有这些事件的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">oncomplete: function(providedCallback) &#123;</span><br><span class="line">      if (typeof (providedCallback) === &apos;function&apos;) &#123;</span><br><span class="line">        this._introCompleteCallback = providedCallback;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        throw new Error(&apos;Provided callback for oncomplete was not a function.&apos;);</span><br><span class="line">      &#125;</span><br><span class="line">      return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="成果图"><a href="#成果图" class="headerlink" title="成果图"></a>成果图</h3><p>最后附一张成果图</p>
+<p><img src="/img/introjs001.png" alt="image"></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="http://pqsky.me/2017/04/12/原创-Intro-js使用心得/#comments" class="article-comment-link">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    [总结]javax.imageio.IIOException Invalid icc profile bad sequence number
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/" class="title">CentOS6.5 安装 Elasticsearch5.5 超详细教程</a></p>
+                            <p class="item-date"><time datetime="2017-07-11T06:33:37.000Z" itemprop="datePublished">2017-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" class="title">[总结]javax.imageio.IIOException Invalid icc profile bad sequence number</a></p>
+                            <p class="item-date"><time datetime="2017-06-26T04:15:11.000Z" itemprop="datePublished">2017-06-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/12/原创-Intro-js使用心得/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/04/12/原创-Intro-js使用心得/" class="title">[原创]Intro.js使用心得</a></p>
+                            <p class="item-date"><time datetime="2017-04-12T03:11:12.000Z" itemprop="datePublished">2017-04-12</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Etiquetas</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题总结/">问题总结</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/问题总结/" style="font-size: 10px;">问题总结</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://hanfeng.io">hanfeng</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Dandelion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+			.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1272179660&web_id=1272179660" language="JavaScript"></script>
+
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1736004"></script>
+
+
+
+    
+        <script src="/vendor/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-share.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-video.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

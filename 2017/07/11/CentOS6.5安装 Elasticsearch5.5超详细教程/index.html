@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>CentOS6.5 安装 Elasticsearch5.5 超详细教程 | pqsky</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Elasticsearch 简介下面摘自官网  Elasticsearch is a distributed, RESTful search and analytics engine capable of solving a growing number of use cases. As the heart of the Elastic Stack, it centrally stores you">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS6.5 安装 Elasticsearch5.5 超详细教程">
+<meta property="og:url" content="http://pqsky.me/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/index.html">
+<meta property="og:site_name" content="pqsky">
+<meta property="og:description" content="Elasticsearch 简介下面摘自官网  Elasticsearch is a distributed, RESTful search and analytics engine capable of solving a growing number of use cases. As the heart of the Elastic Stack, it centrally stores you">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-11T06:46:50.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS6.5 安装 Elasticsearch5.5 超详细教程">
+<meta name="twitter:description" content="Elasticsearch 简介下面摘自官网  Elasticsearch is a distributed, RESTful search and analytics engine capable of solving a growing number of use cases. As the heart of the Elastic Stack, it centrally stores you">
+    
+
+    
+        <link rel="alternate" href="/" title="pqsky" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">pqsky</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">蒲公英丶</h2>
+            <h3 id="title">将进酒 &amp; 杯莫停</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>北京 , 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/pqsky">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                3
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                1
+                <span>Etiqueta</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/pqsky" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="title-CentOS6.5安装 Elasticsearch5.5超详细教程" class="article article-type-title" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CentOS6.5 安装 Elasticsearch5.5 超详细教程
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/">
+            <time datetime="2017-07-11T06:33:37.000Z" itemprop="datePublished">2017-07-11</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="Elasticsearch-简介"><a href="#Elasticsearch-简介" class="headerlink" title="Elasticsearch 简介"></a>Elasticsearch 简介</h3><p>下面摘自官网</p>
+<blockquote>
+<p>Elasticsearch is a distributed, RESTful search and analytics engine capable of solving a growing number of use cases. As the heart of the Elastic Stack, it centrally stores your data so you can discover the expected and uncover the unexpected.<br>(Elasticsearch是一种分布式，REST风格的搜索和分析引擎，能够解决越来越多的用例。 作为弹性堆栈的核心，它集中存储您的数据，以便您可以发现预期并发现意外。)</p>
+</blockquote>
+<h3 id="Elasticsearch-安装"><a href="#Elasticsearch-安装" class="headerlink" title="Elasticsearch 安装"></a>Elasticsearch 安装</h3><h4 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h4><ul>
+<li>安装最新版 <a href="https://www.java.com" target="_blank" rel="noopener">JDK</a> ，本人测试环境是JDK 1.8.0_112，官方说 JDK 1.7 + 即可</li>
+<li>下载 <a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="noopener">Elasticsearch</a> 最新安装包。</li>
+</ul>
+<a id="more"></a>
+<h4 id="安装Elasticsearch"><a href="#安装Elasticsearch" class="headerlink" title="安装Elasticsearch"></a>安装Elasticsearch</h4><ul>
+<li>解压安装包</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /opt/es</span><br><span class="line"></span><br><span class="line">$ tar zxvf elasticsearch-5.5.0.tar.gz</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动Elasticsearch</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd elasticsearch-5.5.0</span><br><span class="line"></span><br><span class="line">$ ./bin/elasticsearch</span><br></pre></td></tr></table></figure>
+<p>此时由于是用root用户启动的，所以会报如下错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[2017-07-11T12:10:33,262][WARN ][o.e.b.ElasticsearchUncaughtExceptionHandler] [] uncaught exception in thread [main]</span><br><span class="line">org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:127) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:114) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:67) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:122) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.cli.Command.main(Command.java:88) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:91) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:84) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">Caused by: java.lang.RuntimeException: can not run elasticsearch as root</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:106) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:194) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:351) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:123) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	... 6 more</span><br></pre></td></tr></table></figure>
+<p>解决方案有两种：</p>
+<ol>
+<li><p>直接修改Elasticsearch配置，支持用root启动。 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为未验证，后续补充</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>出于系统安全考虑，建议新建单独的用户运行 Elasticsearch。</p>
+<p> (1) 创建用户组和用户</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ groupadd esgroup</span><br><span class="line">$ useradd es -g esgroup</span><br></pre></td></tr></table></figure>
+<p> (2) 修改 Elasticsearch 文件夹及内部所有文件的所属用户组和用户（注意用户和用户组的顺序）。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chown -R es:esgroup /opt/es/elasticsearch-5.5.0</span><br></pre></td></tr></table></figure>
+<p> (3) 切换到es用户，并启动Elasticsearch</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ su - es</span><br><span class="line">[es@localhost ~]$ cd /opt/es/elasticsearch-5.5.0</span><br><span class="line">[es@localhost elasticsearch-5.5.0]$ ./bin/elasticsearch</span><br></pre></td></tr></table></figure>
+<p> (4) 启动后，输出如下信息，启动成功</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[2017-07-11T12:48:13,611][INFO ][o.e.n.Node               ] initialized</span><br><span class="line">[2017-07-11T12:48:13,611][INFO ][o.e.n.Node               ] [zzZc25X] starting ...</span><br><span class="line">[2017-07-11T12:48:13,878][INFO ][o.e.t.TransportService   ] [zzZc25X] publish_address &#123;127.0.0.1:9300&#125;, bound_addresses &#123;[::1]:9300&#125;, &#123;127.0.0.1:9300&#125;</span><br><span class="line">[2017-07-11T12:48:13,898][WARN ][o.e.b.BootstrapChecks    ] [zzZc25X] max number of threads [1024] for user [es] is too low, increase to at least [2048]</span><br><span class="line">[2017-07-11T12:48:13,899][WARN ][o.e.b.BootstrapChecks    ] [zzZc25X] max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</span><br><span class="line">[2017-07-11T12:48:13,899][WARN ][o.e.b.BootstrapChecks    ] [zzZc25X] system call filters failed to install; check the logs and fix your configuration or disable system call filters at your own risk</span><br><span class="line">[2017-07-11T12:48:17,005][INFO ][o.e.c.s.ClusterService   ] [zzZc25X] new_master &#123;zzZc25X&#125;&#123;zzZc25XOTdacyXbQyrqhMw&#125;&#123;ajlhWEWxTZyitnVUy-OFHQ&#125;&#123;127.0.0.1&#125;&#123;127.0.0.1:9300&#125;, reason: zen-disco-elected-as-master ([0] nodes joined)</span><br><span class="line">[2017-07-11T12:48:17,056][INFO ][o.e.h.n.Netty4HttpServerTransport] [zzZc25X] publish_address &#123;127.0.0.1:9200&#125;, bound_addresses &#123;[::1]:9200&#125;, &#123;127.0.0.1:9200&#125;</span><br><span class="line">[2017-07-11T12:48:17,058][INFO ][o.e.n.Node               ] [zzZc25X] started</span><br><span class="line">[2017-07-11T12:48:17,321][INFO ][o.e.g.GatewayService     ] [zzZc25X] recovered [0] indices into cluster_state</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="修改-Elasticsearch-为可访问的外网-IP"><a href="#修改-Elasticsearch-为可访问的外网-IP" class="headerlink" title="修改 Elasticsearch 为可访问的外网 IP"></a>修改 Elasticsearch 为可访问的外网 IP</h3><ul>
+<li><p>在 elasticsearch.yml 中增加配置</p>
+<blockquote>
+<p>vi /opt/es/elasticsearch-5.5.0/config/elasticsearch.yml</p>
+<p>添加如下内容:</p>
+<p>network.host: 172.16.X.X</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="验证-Elasticsearch-启动状态"><a href="#验证-Elasticsearch-启动状态" class="headerlink" title="验证 Elasticsearch 启动状态"></a>验证 Elasticsearch 启动状态</h3><ul>
+<li><p>浏览器直接访问地址查看状态</p>
+<p>  输入地址：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://172.16.X.X:9200/</span><br></pre></td></tr></table></figure>
+<p> 输出结果：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot; : &quot;zzZc25X&quot;,</span><br><span class="line">  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,</span><br><span class="line">  &quot;cluster_uuid&quot; : &quot;m52p74pBSIeX-Le50BM_qQ&quot;,</span><br><span class="line">  &quot;version&quot; : &#123;</span><br><span class="line">    &quot;number&quot; : &quot;5.5.0&quot;,</span><br><span class="line">    &quot;build_hash&quot; : &quot;260387d&quot;,</span><br><span class="line">    &quot;build_date&quot; : &quot;2017-06-30T23:16:05.735Z&quot;,</span><br><span class="line">    &quot;build_snapshot&quot; : false,</span><br><span class="line">    &quot;lucene_version&quot; : &quot;6.6.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>命令查看状态 </p>
+<p>  输入命令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[es@localhost elasticsearch-5.5.0]$ ps -ef | grep elastic</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>   输出结果：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">es       26430 26272 16 12:59 pts/1    00:00:22 /opt/jdk1.8.0_112/bin/java -Xms2g -Xmx2g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -server -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -Djdk.io.permissionsUseCanonicalPath=true -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Dlog4j.skipJansi=true -XX:+HeapDumpOnOutOfMemoryError -Des.path.home=/opt/es/elasticsearch-5.5.0 -cp /opt/es/elasticsearch-5.5.0/lib/* org.elasticsearch.bootstrap.Elasticsearch</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="Elasticsearch-关闭"><a href="#Elasticsearch-关闭" class="headerlink" title="Elasticsearch 关闭"></a>Elasticsearch 关闭</h3><ul>
+<li><p>通过上一步查看到的 Elasticsearch 状态中的端口，执行下面命令杀死 Elasticsearch 进程</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[es@localhost elasticsearch-5.5.0]$ kill -9 26430</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="安装过程中的一些其他问题"><a href="#安装过程中的一些其他问题" class="headerlink" title="安装过程中的一些其他问题"></a>安装过程中的一些其他问题</h3><ul>
+<li><p>启动时会有这么一个警告，不影响使用，网上查询说使用最新linux版本就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[2017-07-11T13:13:08,465][WARN ][o.e.b.JNANatives         ] unable to install syscall filter: </span><br><span class="line">java.lang.UnsupportedOperationException: seccomp unavailable: requires kernel 3.5+ with CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER compiled in</span><br><span class="line">	at org.elasticsearch.bootstrap.SystemCallFilter.linuxImpl(SystemCallFilter.java:350) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.SystemCallFilter.init(SystemCallFilter.java:638) ~[elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.JNANatives.tryInstallSystemCallFilter(JNANatives.java:215) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Natives.tryInstallSystemCallFilter(Natives.java:99) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:111) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:194) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:351) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:123) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:114) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:67) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:122) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.cli.Command.main(Command.java:88) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:91) [elasticsearch-5.5.0.jar:5.5.0]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:84) [elasticsearch-5.5.0.jar:5.5.0]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>max file descriptors [4096] for elasticsearch process likely too low, increase to at least [65536]</p>
+<p>  解决方案：切换到root用户，编辑 limits.conf 添加下面内容</p>
+<blockquote>
+<p>vi /etc/security/limits.conf </p>
+<p>添加如下内容:</p>
+<p>* soft nofile 65536</p>
+<p>* hard nofile 131072</p>
+<p>* soft nproc 2048</p>
+<p>* hard nproc 4096</p>
+</blockquote>
+</li>
+<li><p>max number of threads [1024] for user [es] is too low, increase to at least [2048]</p>
+<p>  解决方案：切换到root用户，进入limits.d目录下修改配置文件。</p>
+<blockquote>
+<p>修改如下内容：</p>
+<p>* soft nproc 1024</p>
+<p>#修改为</p>
+<p>* soft nproc 2048</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</p>
+<p>  解决方案：切换到root用户修改配置sysctl.conf</p>
+<blockquote>
+<p>vi /etc/sysctl.conf </p>
+<p>添加下面配置：</p>
+<p>vm.max_map_count=655360</p>
+<p>并执行命令：</p>
+<p>sysctl -p</p>
+</blockquote>
+</li>
+<li><p>system call filters failed to install; check the logs and fix your configuration or disable system call filters at your own risk</p>
+<p>  原因： CentOS6.X 不支持SecComp，而ES5.2.0默认bootstrap.system_call_filter为true进行检测，所以导致检测失败，失败后直接导致ES不能启动。</p>
+<p>  解决方案：修改/opt/es/elasticsearch-5.5.0/config/elasticsearch.yml中配置</p>
+<blockquote>
+<p>vi /opt/es/elasticsearch-5.5.0/config/elasticsearch.yml</p>
+<p>修改如下配置</p>
+<p>#bootstrap.memory_lock: true</p>
+<p>#修改为</p>
+<p>bootstrap.memory_lock: false</p>
+<p>bootstrap.system_call_filter: false</p>
+</blockquote>
+</li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="http://pqsky.me/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/#comments" class="article-comment-link">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">[总结]javax.imageio.IIOException Invalid icc profile bad sequence number</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/07/11/CentOS6.5安装 Elasticsearch5.5超详细教程/" class="title">CentOS6.5 安装 Elasticsearch5.5 超详细教程</a></p>
+                            <p class="item-date"><time datetime="2017-07-11T06:33:37.000Z" itemprop="datePublished">2017-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/06/26/javax.imageio.IIOException Invalid icc profile bad sequence number/" class="title">[总结]javax.imageio.IIOException Invalid icc profile bad sequence number</a></p>
+                            <p class="item-date"><time datetime="2017-06-26T04:15:11.000Z" itemprop="datePublished">2017-06-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/12/原创-Intro-js使用心得/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/04/12/原创-Intro-js使用心得/" class="title">[原创]Intro.js使用心得</a></p>
+                            <p class="item-date"><time datetime="2017-04-12T03:11:12.000Z" itemprop="datePublished">2017-04-12</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Etiquetas</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题总结/">问题总结</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/问题总结/" style="font-size: 10px;">问题总结</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://hanfeng.io">hanfeng</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Dandelion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+			.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1272179660&web_id=1272179660" language="JavaScript"></script>
+
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1736004"></script>
+
+
+
+    
+        <script src="/vendor/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-share.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-video.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
